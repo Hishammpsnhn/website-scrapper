@@ -45,7 +45,7 @@ export const getInsight = async (req, res) => {
             });
         }
     } catch (error) {
-        res.status(400).json({ message: error.message })
+        res.status(400).json({ message: error })
     }
 }
 export const updateInsights = async (req, res) => {

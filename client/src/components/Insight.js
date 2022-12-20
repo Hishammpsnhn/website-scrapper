@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { deleteInsights, updateInsight } from '../Action/getInsights'
 import { UrlContext } from '../store/context'
+import { toast, ToastContainer } from "react-toastify";
 
 function Insight({ item }) {
     const { setInsights, insights } = useContext(UrlContext);
@@ -8,16 +9,29 @@ function Insight({ item }) {
     const handleDelete = (id) => {
         deleteInsights(id);
         setInsights(insights.filter((post) => post._id !== id));
+        toast.info('Removed Successfully', {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            });
     }
 
     const handleFavorite = (id) => {
+        const ids = toast.loading("Please wait...");
         if (item.favorite === true) {
             updateInsight(id, { favorite: false }).then((res) => {
-                setInsights(insights.map((post) => (post._id === res._id ? res : post)))
+                setInsights(insights.map((post) => (post._id === res._id ? res : post)));
+                toast.update(ids, { render: "Remove-From-Fav", type: "success", isLoading: false ,autoClose: 1000,closeOnClick: true,});
             })
         } else {
             updateInsight(id, { favorite: true }).then((res) => {
-                setInsights(insights.map((post) => (post._id === res._id ? res : post)))
+                setInsights(insights.map((post) => (post._id === res._id ? res : post)));
+                toast.update(ids, { render: "Add-To-Fav", type: "success", isLoading: false ,autoClose: 1000,closeOnClick: true});
             })
         }
     }
@@ -55,6 +69,7 @@ function Insight({ item }) {
                     {item.favorite ? "Remove-Fav" : "Add-To-Fav"}
                 </button>
             </td>
+        
         </tr>
     )
 }

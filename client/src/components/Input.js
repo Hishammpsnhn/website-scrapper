@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import { toast } from 'react-toastify';
 import { getInsight } from '../Action/getInsights';
 import { UrlContext } from '../store/context';
 
@@ -9,9 +10,13 @@ function Input() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const id = toast.loading("Please wait...")
         getInsight({ domain: url, favorite: false }).then((res)=>{
             setInsights([res,...insights])
+            toast.update(id, { render: "Insights Added", type: "success", isLoading: false ,autoClose: 3000,closeOnClick: true,});
             setUrl("")
+        }).catch((err)=>{
+            toast.update(id, { render: "URL Not Found !", type: "error", isLoading: false ,autoClose: 2000, closeOnClick: true,});
         })
     }
     
