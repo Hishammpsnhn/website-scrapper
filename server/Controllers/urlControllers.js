@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 
 export const allInsights = async (req, res) => {
     try {
-        const allInsights = await urlModal.find();
+        const allInsights = await urlModal.find().sort({_id:-1});
         res.status(200).json(allInsights);
     } catch (error) {
         res.status(404).json({ message: error.message });
@@ -49,12 +49,11 @@ export const getInsight = async (req, res) => {
     }
 }
 export const updateInsights = async (req, res) => {
-    console.log("helo udpata")
     const { id } = req.params;
     const { favorite } = req.body;
     console.log(id, req.body)
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
-    // const insight = await urlModal.findById(id);
+
     const updatedPost = await urlModal.findByIdAndUpdate(id, { favorite: favorite }, { new: true });
     res.json(updatedPost);
 }

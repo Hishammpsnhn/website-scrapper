@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { UrlContext } from '../store/context'
 import Insight from './Insight'
-function Table({ insights, setInsights }) {
+function Table() {
+    const { insights } = useContext(UrlContext)
     return (
 
         <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
@@ -26,7 +28,7 @@ function Table({ insights, setInsights }) {
                 </thead>
                 <tbody>
                     {insights.map((item, i) => (
-                       <Insight item = {item}/>
+                        <Insight item={item} />
                     ))}
 
 

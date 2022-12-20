@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { allInsights } from './Action/getInsights';
 import './App.css';
 import Input from './components/Input';
 import Table from './components/Table';
+import { UrlContext } from './store/context';
 
 function App() {
-    const [insights,setInsights]= useState([])
+  const {  setInsights} = useContext(UrlContext)
   useEffect(() => {
     allInsights().then((res)=>{
       setInsights(res)
@@ -15,7 +16,7 @@ function App() {
   return (
     <div>
       <Input />
-      <Table insights={insights} setInsights={setInsights} />
+      <Table />
     </div>
   );
 }

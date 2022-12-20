@@ -1,12 +1,20 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { getInsight } from '../Action/getInsights';
+import { UrlContext } from '../store/context';
 
 function Input() {
+    const {  setInsights,insights} = useContext(UrlContext)
+
     const [url, setUrl] = useState("");
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        getInsight({domain:url,favorite:false})
+        getInsight({ domain: url, favorite: false }).then((res)=>{
+            setInsights([res,...insights])
+            setUrl("")
+        })
     }
+    
     return (
         <form onSubmit={handleSubmit} className="w-full max-w-sm">
             <div className="flex items-center border-b border-teal-500 py-2">

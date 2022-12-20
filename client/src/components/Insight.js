@@ -1,16 +1,24 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { deleteInsights, updateInsight } from '../Action/getInsights'
+import { UrlContext } from '../store/context'
 
 function Insight({ item }) {
+    const { setInsights, insights } = useContext(UrlContext);
 
     const handleDelete = (id) => {
-        deleteInsights(id)
+        deleteInsights(id);
+        setInsights(insights.filter((post) => post._id !== id));
     }
+
     const handleFavorite = (id) => {
         if (item.favorite === true) {
-            updateInsight(id, { favorite: false })
+            updateInsight(id, { favorite: false }).then((res) => {
+                setInsights(insights.map((post) => (post._id === res._id ? res : post)))
+            })
         } else {
-            updateInsight(id, { favorite: true })
+            updateInsight(id, { favorite: true }).then((res) => {
+                setInsights(insights.map((post) => (post._id === res._id ? res : post)))
+            })
         }
     }
     return (
@@ -22,7 +30,7 @@ function Insight({ item }) {
                 {item.words}
             </td>
             <td className="py-4 px-6">
-                {item.favorite ? "true" : "false"}
+                {item.favorite ? "True" : "False"}
             </td>
             <td className="py-4 px-6">
                 {item?.images?.map((item, i) => (
