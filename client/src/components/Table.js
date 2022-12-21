@@ -1,13 +1,15 @@
-import React, { useContext } from 'react'
-import { UrlContext } from '../store/context'
-import Insight from './Insight'
+import React, { useContext } from 'react';
+import { UrlContext } from '../store/context';
+import Insight from './Insight';
+
 function Table() {
-    const { insights } = useContext(UrlContext)
+    const { insights } = useContext(UrlContext);
+
     return (
 
-        <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
-            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <div className=" w-[90%] m-auto overflow-x-auto relative shadow-md sm:rounded-lg">
+            <table className="w-full text-sm text-left text-black dark:text-gray-900">
+                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-600 dark:text-cyan-600">
                     <tr>
                         <th scope="col" className="py-3 px-6">
                             Domain Name
@@ -28,14 +30,11 @@ function Table() {
                 </thead>
                 <tbody>
                     {insights.map((item, i) => (
-                        <Insight item={item} />
+                        <Insight key={i} item={item} />
                     ))}
-
-
                 </tbody>
             </table>
         </div>
-
     )
 }
 
