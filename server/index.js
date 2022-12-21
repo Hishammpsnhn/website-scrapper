@@ -4,6 +4,7 @@ import url from './Routes/urlRoutes.js'
 import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
+
 const app = express()
 dotenv.config()
 
