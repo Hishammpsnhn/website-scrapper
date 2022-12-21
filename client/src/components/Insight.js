@@ -38,7 +38,7 @@ function Insight({ item }) {
     return (
         <tr className="bg-white dark:bg-slate-300">
             <th scope="row" className="py-4 px-6 font-mdium text-black whitespace-nowrap dark:text-black align-top">
-                <a href={item.domain}>
+                <a href={item.domain} target="_blank">
                     {item.domain}
                 </a>
             </th>
@@ -52,8 +52,8 @@ function Insight({ item }) {
                 {item?.images?.map((item, i) => (
                     <ul key={i}>
                         <li>
-                            <a href={item} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                {item.length > 30 && (item = item.substring(0, 30))}...
+                            <a href={item} target="_blank" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                {item?.length > 30 && (item = item.substring(0, 30))}...
                             </a>
                         </li>
                     </ul>
