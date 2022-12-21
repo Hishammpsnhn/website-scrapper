@@ -37,18 +37,18 @@ function Insight({ item }) {
     }
     return (
         <tr className="bg-white dark:bg-slate-300">
-            <th scope="row" className="py-4 px-6 font-mdium text-black whitespace-nowrap dark:text-black">
+            <th scope="row" className="py-4 px-6 font-mdium text-black whitespace-nowrap dark:text-black align-top">
                 <a href={item.domain}>
                     {item.domain}
                 </a>
             </th>
-            <td className="py-4 px-6">
+            <td className="py-4 px-6 align-top">
                 {item.words}
             </td>
-            <td className="py-4 px-6">
+            <td className="py-4 px-6 align-top">
                 {item.favorite ? (<>True <span className='text-lg text-red-600'>♥️</span> </>) : "False"}
             </td>
-            <td className="py-4 px-6">
+            <td className="py-4 px-6 align-top">
                 {item?.images?.map((item, i) => (
                     <ul key={i}>
                         <li>
@@ -59,7 +59,7 @@ function Insight({ item }) {
                     </ul>
                 ))}
             </td>
-            <td className="py-4 px-6">
+            <td className="py-4 px-6 align-top">
                 <button className="flex-shrink-0 bg-teal-500 border-transparent font-semibold border-4 text-red-600 hover:text-red-900 text-sm py-1 m-1 px-2 rounded"
                     onClick={() => handleDelete(item._id)}
                 >
